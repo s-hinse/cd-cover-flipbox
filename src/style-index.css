@@ -1,0 +1,189 @@
+/**
+ * CD Cover Flipbox - Frontend and Editor Styles
+ */
+
+/* Container styles */
+.cd-cover-flipbox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
+.cd-cover-flipbox-container {
+    perspective: 1000px;
+    position: relative;
+    /* Ensure the container maintains square dimensions (1:1 aspect ratio) even when using percentage width */
+    aspect-ratio: 1 / 1;
+}
+
+/* Fallback for browsers that don't support aspect-ratio */
+@supports not (aspect-ratio: 1 / 1) {
+    .cd-cover-flipbox-container[style*="%"] {
+        height: 0 !important;
+        padding-top: 100% !important;
+        width: 100% !important;
+    }
+
+    .cd-cover-flipbox-container[style*="%"] .cd-cover-flipbox-inner {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+}
+
+/* Inner flipbox that handles the 3D effect */
+.cd-cover-flipbox-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+/* Horizontal Flip Animation */
+.cd-cover-flipbox-flip-horizontal:hover .cd-cover-flipbox-inner,
+.cd-cover-flipbox-flip-horizontal:focus .cd-cover-flipbox-inner {
+    transform: rotateY(180deg);
+}
+
+/* Flip from Top Animation */
+.cd-cover-flipbox-flip-top:hover .cd-cover-flipbox-inner,
+.cd-cover-flipbox-flip-top:focus .cd-cover-flipbox-inner {
+    transform: rotateX(180deg);
+}
+
+.cd-cover-flipbox-flip-top .cd-cover-flipbox-back {
+    transform: rotateX(180deg);
+}
+
+/* Grow from Middle Animation */
+.cd-cover-flipbox-grow-middle .cd-cover-flipbox-back {
+    transform: scale(0);
+    transition: transform 0.8s;
+}
+
+.cd-cover-flipbox-grow-middle:hover .cd-cover-flipbox-back,
+.cd-cover-flipbox-grow-middle:focus .cd-cover-flipbox-back {
+    transform: scale(1);
+    z-index: 2;
+}
+
+/* Fade ein / fade out */
+.cd-cover-flipbox-fade .cd-cover-flipbox-front {
+    transition: opacity 0.5s;
+
+}
+
+.cd-cover-flipbox-fade .cd-cover-flipbox-back {
+    transform: none;
+    position: relative;
+    opacity: 0;
+    transition: opacity 0.5s;
+
+}
+
+.cd-cover-flipbox-fade:hover .cd-cover-flipbox-front {
+    opacity: 0;
+}
+
+.cd-cover-flipbox-fade:hover .cd-cover-flipbox-back {
+    opacity: 1;
+}
+
+/* For touch devices */
+@media (hover: none) {
+    .cd-cover-flipbox-flip-horizontal:active .cd-cover-flipbox-inner {
+        transform: rotateY(180deg);
+    }
+
+    .cd-cover-flipbox-flip-top:active .cd-cover-flipbox-inner {
+        transform: rotateX(180deg);
+    }
+
+    .cd-cover-flipbox-grow-middle:active .cd-cover-flipbox-front {
+        opacity: 0;
+    }
+
+    .cd-cover-flipbox-grow-middle:active .cd-cover-flipbox-back {
+        transform: scale(1);
+        z-index: 2;
+    }
+
+    .cd-cover-flipbox-fade:active .cd-cover-flipbox-front {
+        opacity: 0;
+    }
+
+    .cd-cover-flipbox-fade:active .cd-cover-flipbox-back {
+        opacity: 1;
+    }
+}
+
+/* Position the front and back sides */
+.cd-cover-flipbox-front,
+.cd-cover-flipbox-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Front side styles */
+.cd-cover-flipbox-front {
+    background-color: #f8f8f8;
+    color: black;
+}
+
+.cd-cover-flipbox-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Back side styles */
+.cd-cover-flipbox-back {
+    transform: rotateY(180deg);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.cd-cover-flipbox-back-content {
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 10px; /* Space for scrollbar */
+    box-sizing: border-box;
+    /* Scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+}
+
+/* Webkit scrollbar styling */
+.cd-cover-flipbox-back-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.cd-cover-flipbox-back-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.cd-cover-flipbox-back-content::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 3px;
+}
+
+/* Make sure the content is readable */
+.cd-cover-flipbox-back-content p {
+    margin-top: 0;
+}

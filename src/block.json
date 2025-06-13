@@ -1,0 +1,59 @@
+{
+  "apiVersion": 2,
+  "name": "cd-cover-flipbox/block",
+  "title": "CD Cover Flipbox",
+  "category": "media",
+  "icon": "album",
+  "description": "Display an image that flips on hover to show scrollable info text.",
+  "supports": {
+    "html": false,
+    "align": ["wide", "full"]
+  },
+  "textdomain": "cd-cover-flipbox",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css",
+  "attributes": {
+    "imageUrl": {
+      "type": "string",
+      "default": ""
+    },
+    "imageId": {
+      "type": "number"
+    },
+    "imageAlt": {
+      "type": "string",
+      "default": ""
+    },
+    "infoText": {
+      "type": "string",
+      "source": "html",
+      "selector": ".cd-cover-flipbox-back-content div",
+      "default": ""
+    },
+    "boxSize": {
+      "type": "number",
+      "default": 100
+    },
+    "boxSizeUnit": {
+      "type": "string",
+      "default": "%"
+    },
+    "backgroundColor": {
+      "type": "string",
+      "default": "#f0f0f0"
+    },
+    "textColor": {
+      "type": "string",
+      "default": "#333333"
+    },
+    "animationType": {
+      "type": "string",
+      "default": "flip-horizontal"
+    },
+    "showShadow": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}
