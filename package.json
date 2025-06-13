@@ -1,8 +1,8 @@
 {
   "name": "cd-cover-flipbox",
-  "version": "1.0.0",
+  "version": "1.3.0",
   "description": "A Gutenberg block that displays an image which flips on hover to show scrollable info text.",
-  "author": "WordPress Developer",
+  "author": "Sven Hinse",
   "license": "GPL-2.0-or-later",
   "main": "build/index.js",
   "scripts": {
